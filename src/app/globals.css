@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #060709;
+  --color-panel: #0b0d10;
+  --color-elevated: #111418;
+  --color-line: #1b2026;
+  --color-line-strong: #2a3139;
+  --color-accent: #c9f75a;
+  --color-accent-strong: #b4e83f;
+  --color-muted: #8b929c;
+  --ease-snappy: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: #d6d9dd;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.canvas-grid {
+  background-color: #060709;
+  background-image:
+    radial-gradient(
+      ellipse 70% 50% at 50% -10%,
+      rgba(201, 247, 90, 0.07),
+      transparent 70%
+    ),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: auto, 22px 22px;
+}
+
+.canvas-midnight {
+  background-color: #070a12;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(71, 96, 255, 0.18), transparent 65%),
+    radial-gradient(ellipse 60% 50% at 85% 110%, rgba(28, 200, 255, 0.08), transparent 70%);
+}
+
+.canvas-plum {
+  background-color: #0c0710;
+  background-image:
+    radial-gradient(ellipse 70% 60% at 50% -5%, rgba(202, 80, 255, 0.14), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 10% 110%, rgba(255, 105, 180, 0.07), transparent 70%);
+}
+
+.canvas-light {
+  background-color: #e9e6df;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 50% -10%, #ffffff, transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.06) 1px, transparent 0);
+  background-size: auto, 22px 22px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@keyframes loading-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@keyframes loading-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.loading-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 247, 90, 0.85),
+    transparent
+  );
+  animation: loading-sweep 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-sweep::after {
+    width: 100%;
+    animation: loading-pulse 1.6s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 1023px) {
+  .device-sidebar[data-open="false"] {
+    visibility: hidden;
+    transition:
+      transform 200ms var(--ease-snappy),
+      visibility 0s linear 200ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .device-sidebar[data-open] {
+    transition: none;
+  }
+}
