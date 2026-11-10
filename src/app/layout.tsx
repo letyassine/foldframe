@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
         url: "/screenshot.png",
         width: 1440,
         height: 900,
-        alt: "foldframe previewing a website on a Galaxy Z Fold 6",
+        alt: "foldframe previewing a website on a Galaxy Z Fold 6 and Galaxy Z Flip 6",
       },
     ],
   },
@@ -58,7 +59,7 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
